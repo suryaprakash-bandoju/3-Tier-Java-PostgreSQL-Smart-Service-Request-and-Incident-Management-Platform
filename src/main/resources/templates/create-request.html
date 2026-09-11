@@ -1,22 +1,78 @@
+<!-- FILE: src/main/resources/templates/create-request.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>New Request</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"></head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Request - Service Desk</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
 <body>
-<nav class="navbar navbar-dark bg-primary"><div class="container"><a class="navbar-brand" href="/dashboard">IT Service Desk</a></div></nav>
-<div class="container mt-4">
-    <h2>Create New Request</h2>
-    <form th:action="@{/requests}" th:object="${request}" method="post">
-        <div class="mb-3"><label class="form-label">Title</label><input type="text" th:field="*{title}" class="form-control" required></div>
-        <div class="mb-3"><label class="form-label">Description</label><textarea th:field="*{description}" class="form-control" rows="4" required></textarea></div>
-        <div class="mb-3"><label class="form-label">Priority</label>
-            <select th:field="*{priority}" class="form-select">
-                <option value="LOW">Low</option><option value="MEDIUM">Medium</option><option value="HIGH">High</option><option value="CRITICAL">Critical</option>
-            </select>
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/dashboard"><i class="bi bi-headset"></i> ServiceDesk</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/requests">Requests</a></li>
+                </ul>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit Request</button>
-        <a href="/requests" class="btn btn-secondary">Cancel</a>
-    </form>
-</div>
+    </nav>
+
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                        <i class="bi bi-plus-circle me-2 text-primary"></i> Create New Service Request
+                    </div>
+                    <div class="card-body p-4">
+                        <form th:action="@{/requests}" th:object="${request}" method="post">
+                            <div class="mb-4">
+                                <label for="title" class="form-label">Request Title</label>
+                                <input type="text" th:field="*{title}" id="title" class="form-control" placeholder="e.g., VPN connection unavailable" required>
+                            </div>
+                            
+                            <div class="row mb-4">
+                                <div class="col-md-6 mb-3 mb-md-0">
+                                    <label for="priority" class="form-label">Priority Level</label>
+                                    <select th:field="*{priority}" id="priority" class="form-select">
+                                        <option value="LOW">Low</option>
+                                        <option value="MEDIUM">Medium</option>
+                                        <option value="HIGH">High</option>
+                                        <option value="CRITICAL">Critical</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="category" class="form-label">Category</label>
+                                    <select th:field="*{category.id}" id="category" class="form-select" required>
+                                        <option value="" disabled selected>Select category...</option>
+                                        <option value="1">Network</option>
+                                        <option value="2">Hardware</option>
+                                        <option value="3">Software</option>
+                                        <option value="4">Access/Permissions</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea th:field="*{description}" id="description" class="form-control" rows="5" placeholder="Provide detailed information about the issue or request..." required></textarea>
+                            </div>
+
+                            <div class="d-flex justify-content-end gap-2">
+                                <a href="/requests" class="btn btn-outline-secondary">Cancel</a>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-send me-1"></i> Submit Request
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
