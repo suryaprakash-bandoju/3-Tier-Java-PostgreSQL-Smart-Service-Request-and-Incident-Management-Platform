@@ -33,14 +33,13 @@ CREATE TABLE IF NOT EXISTS comments (
     user_id INT REFERENCES users(id)
 );
 
--- Seed Data
--- Passwords are BCrypt encoded for 'password123'
+-- Seed Data (Plain Text Passwords for DevOps Practice)
 INSERT INTO categories (name) VALUES ('Network'), ('Hardware'), ('Software'), ('Access/Permissions');
 
 INSERT INTO users (username, password, full_name, role) VALUES 
-('user1', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'Alice User', 'USER'),
-('agent1', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'Bob Agent', 'AGENT'),
-('manager1', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'Charlie Manager', 'MANAGER');
+('user1', 'password123', 'Alice User', 'USER'),
+('agent1', 'password123', 'Bob Agent', 'AGENT'),
+('manager1', 'password123', 'Charlie Manager', 'MANAGER');
 
 INSERT INTO service_requests (title, description, priority, status, category_id, created_by_id) VALUES
 ('VPN Connection Failed', 'Cannot connect to corporate VPN from home.', 'HIGH', 'OPEN', 1, 1),
