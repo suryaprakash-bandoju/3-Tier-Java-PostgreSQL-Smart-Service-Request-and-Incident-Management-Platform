@@ -1,4 +1,3 @@
-```markdown
 # Smart Service Request & Incident Management Platform
 
 ## Overview
